@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class IndicatorManager : MonoBehaviour
 {
+    [SerializeField] float bottomPos = 0;
+    [SerializeField] float topPos = 0;
+
     float speed = 0.08f;
     Vector3 movement = new Vector3(0, 1, 0);
     Vector3 rotationAngle = new Vector3(0, 240, 0);
@@ -20,9 +23,9 @@ public class IndicatorManager : MonoBehaviour
     {
         transform.Translate(movement * speed * Time.deltaTime);
         transform.Rotate(rotationAngle * Time.deltaTime);
-        if (transform.localPosition.y > 0)
+        if (transform.localPosition.y - topPos > 0)
             movement = new Vector3(0, 1, 0);
-        else if (transform.localPosition.y < maxDistance)
+        else if (transform.localPosition.y - bottomPos < maxDistance)
             movement = new Vector3(0, -1, 0);
     }
 }

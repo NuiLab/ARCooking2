@@ -84,9 +84,15 @@ public class OvenManager : MonoBehaviour
                             notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnViewport(notificationNumber, "Pizza", progressText_GO.GetComponent<TextMesh>().text, transform.GetInstanceID());
                             notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Pizza", progressText_GO.GetComponent<TextMesh>().text, globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, 0.1f, 0), Quaternion.identity);
                             break;
+                        case 3:
+                            if (notification_GO != null)
+                                Destroy(notification_GO);
+                            notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnObject(notificationNumber, "Pizza", progressText_GO.GetComponent<TextMesh>().text, transform.GetInstanceID());
+                            notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Pizza", progressText_GO.GetComponent<TextMesh>().text, transform.gameObject, new Vector3(-0.2f, 0.5f, 0), new Quaternion(0, 0.707106829f, 0, 0.707106829f), new Vector3(4, 4, 1.33333337f));
+                            break;
                     }
                 }
-                if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 3 && PersistentGOManager.instance.GetNotificationSound())
+                if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 4 && PersistentGOManager.instance.GetNotificationSound())
                 {
                     PersistentGOManager.instance.GetComponent<PersistentGOManager>().AddData("Notification", "Pizza:" + progressText_GO.GetComponent<TextMesh>().text + ":" + transform.GetInstanceID().ToString(), 1);
                     Camera.main.transform.GetComponent<AudioSource>().Play();

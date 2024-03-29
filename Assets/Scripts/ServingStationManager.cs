@@ -84,9 +84,13 @@ public class ServingStationManager : MonoBehaviour
                     notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnViewport(notificationNumber, "Customer", "New Customer", custRef.transform.GetInstanceID());
                     notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Customer", "New Customer", globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, 0.1f, 0), Quaternion.identity);
                     break;
+                case 3:
+                    notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnObject(notificationNumber, "Customer", "New Customer", custRef.transform.GetInstanceID());
+                    notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Customer", "New Customer", custRef, new Vector3(0, 0.05f, -0.05f));
+                    break;
             }
         }
-        if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 3 && PersistentGOManager.instance.GetNotificationSound())
+        if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 4 && PersistentGOManager.instance.GetNotificationSound())
         {
             PersistentGOManager.instance.GetComponent<PersistentGOManager>().AddData("Notification", "Customer:New Customer" + ":" + custRef.GetInstanceID().ToString(), 1);
             Camera.main.transform.GetComponent<AudioSource>().Play();
@@ -168,7 +172,7 @@ public class ServingStationManager : MonoBehaviour
     private IEnumerator WaitAndChangeScene()
     {
         yield return new WaitForSeconds(customerDuration + 3);
-        if (PersistentGOManager.instance.GetSceneIndex() < 6)
+        if (PersistentGOManager.instance.GetSceneIndex() < 3)
             GameManager.instance.UpdateGameState(GameState.Scene);
         else
             GameManager.instance.UpdateGameState(GameState.End);

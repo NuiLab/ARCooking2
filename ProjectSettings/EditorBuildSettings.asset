@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Control_WOS Scene.unity
     guid: 02df772330437054e9374ca9e1d93d15
+  - enabled: 1
+    path: Assets/Scenes/NoO_WA Scene.unity
+    guid: 4974a3498fa059c43809f4eaa247f9dc
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 251cdd0e62177534f8f81847c44e6770, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: eb2f83d806c558546af7ded5ab69ef72, type: 2}

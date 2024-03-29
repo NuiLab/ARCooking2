@@ -27,6 +27,7 @@ public class StartExperiment : MonoBehaviour
         if (int.TryParse(textField.GetComponentInChildren<TMP_InputField>().text, out pNum))
         {
             persistentGO.GetComponent<PersistentGOManager>().SetParticipantNumber(pNum);
+            persistentGO.GetComponent<PersistentGOManager>().SetSceneOrder();
             var task = LoadNextLevel();
             Destroy(textField);
             Destroy(transform.gameObject);

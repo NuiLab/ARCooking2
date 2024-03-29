@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleScene()
     {
-        persistentGO.GetComponent<PersistentGOManager>().SetSceneNamesAndLoad("NoV_WS Scene");
-        // persistentGO.GetComponent<PersistentGOManager>().SetSceneNamesAndLoad(persistentGO.GetComponent<PersistentGOManager>().GetNextScene());
+        // persistentGO.GetComponent<PersistentGOManager>().SetSceneNamesAndLoad("NoO_WA Scene");
+        persistentGO.GetComponent<PersistentGOManager>().SetSceneNamesAndLoad(persistentGO.GetComponent<PersistentGOManager>().GetNextScene());
         /*
         if (persistentGO.GetComponent<PersistentGOManager>().GetSceneIndex() < 6)
         {
@@ -118,8 +118,11 @@ public enum Conditions
     Tutorial,
     NoO_WS,
     NoO_WOS,
+    NoO_WA,
     NoD_WS,
     NoD_WOS,
+    NoV_WS,
+    NoV_WOS,
     Control_WS,
     Control_WOS
 }

@@ -12,6 +12,7 @@ public class NotificationSetManager : MonoBehaviour
      * 0: Notification on Object
      * 1: Notification on Dock
      * 2: Notification on Viewport
+     * 3: Notification on Object with Arrow
      */
     [SerializeField] GameObject[] notificationPrefabs;
 

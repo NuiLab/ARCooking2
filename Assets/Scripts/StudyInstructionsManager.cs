@@ -63,18 +63,24 @@ public class StudyInstructionsManager : MonoBehaviour
                 mainText.GetComponent<TextMeshProUGUI>().text = instructions[instructionsNum++];
                 break;
             case GameState.Scene:
-                if (GameManager.instance.GetSceneName().Equals("NoD_WS Scene"))
-                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoD_WS Scene"];
-                else if (GameManager.instance.GetSceneName().Equals("NoD_WOS Scene"))
-                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoD_WOS Scene"];
-                else if (GameManager.instance.GetSceneName().Equals("NoO_WS Scene"))
+                if (GameManager.instance.GetSceneName().Equals("NoO_WS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoO_WS Scene"];
+                else if (GameManager.instance.GetSceneName().Equals("NoO_WA Scene"))
+                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoO_WA Scene"];
+                else if (GameManager.instance.GetSceneName().Equals("NoV_WOS Scene"))
+                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoV_WOS Scene"];
+                /*
                 else if (GameManager.instance.GetSceneName().Equals("NoO_WOS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoO_WOS Scene"];
+                else if (GameManager.instance.GetSceneName().Equals("NoV_WS Scene"))
+                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoV_WS Scene"];
+                else if (GameManager.instance.GetSceneName().Equals("NoV_WOS Scene"))
+                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoV_WOS Scene"];
                 else if (GameManager.instance.GetSceneName().Equals("Control_WS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["Control_WS Scene"];
                 else if (GameManager.instance.GetSceneName().Equals("Control_WOS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["Control_WOS Scene"];
+                */
                 break;
             case GameState.End:
                 mainText.GetComponent<TextMeshProUGUI>().text = instructions[instructions.Count - 1];
@@ -125,6 +131,12 @@ public class StudyInstructionsManager : MonoBehaviour
 
         sceneInstructions.Add("Control_WOS Scene", "In this section there will be no notifications. " +
             "You will have to pay attention to all stations at all times and serve the customers to the best of your ability.");
+
+        sceneInstructions.Add("NoO_WA Scene", "In this section the notification will pop-up above the objects that changed state, those that prompted the notification. \n\n" +
+            "Note: In this section an arrow will point to the notifications to help draw your attention to the said notification.");
+
+        sceneInstructions.Add("NoV_WOS Scene", "In this section the notification will pop-up at the top-center position of your viewport.");
+
     }
     void InitializeInstructions()
     {

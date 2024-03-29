@@ -47,11 +47,14 @@ public class PersistentGOManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneNames = new List<string>() { "NoD_WS Scene", "NoD_WOS Scene", "NoO_WS Scene", "NoO_WOS Scene", "Control_WS Scene", "Control_WOS Scene" };
+        sceneNames = new List<string>() { "NoO_WS Scene", "NoO_WA Scene", "NoV_WOS Scene" };      // Change this for different levels
+        /*
         var rnd = new System.Random();
         sceneNames = sceneNames.OrderBy(item => rnd.Next()).ToList();
+        */
         sceneSystem = MixedRealityToolkit.Instance.GetService<IMixedRealitySceneSystem>();
         filePath = Application.persistentDataPath + "/Records";
+        Debug.Log(filePath);
         if (!Directory.Exists(filePath))
             Directory.CreateDirectory(filePath);
         DontDestroyOnLoad(transform.gameObject);
@@ -64,11 +67,12 @@ public class PersistentGOManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha0))
             SetSceneNamesAndLoad("Instructions Scene");
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha1))
-            SetSceneNamesAndLoad("NoD_WS Scene");
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha2))
-            SetSceneNamesAndLoad("NoD_WOS Scene");
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha3))
             SetSceneNamesAndLoad("NoO_WS Scene");
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha2))
+            SetSceneNamesAndLoad("NoO_WA Scene");
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha3))
+            SetSceneNamesAndLoad("NoV_WOS Scene");
+        /*
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha4))
             SetSceneNamesAndLoad("NoO_WOS Scene");
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha5))
@@ -79,7 +83,7 @@ public class PersistentGOManager : MonoBehaviour
             SetSceneNamesAndLoad("Control_WS Scene");
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha8))
             SetSceneNamesAndLoad("Control_WOS Scene");
-
+        */
 
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -151,6 +155,11 @@ public class PersistentGOManager : MonoBehaviour
             AddData("Notification Number", "Called:" + typedNotificationNumberTracker, 2);
             typedNotificationNumberTracker = "";
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            AddData("Notification Noticed", "Called:0", 2);
+        }
     }
 
     public void SetSceneNamesAndLoad(string newSceneName)
@@ -158,12 +167,13 @@ public class PersistentGOManager : MonoBehaviour
         sceneChanged = true;
         if (sceneSystem.IsContentLoaded("Instructions Scene"))
             unloadSceneName = "Instructions Scene";
-        else if (sceneSystem.IsContentLoaded("NoD_WS Scene"))
-            unloadSceneName = "NoD_WS Scene";
-        else if (sceneSystem.IsContentLoaded("NoD_WOS Scene"))
-            unloadSceneName = "NoD_WOS Scene";
         else if (sceneSystem.IsContentLoaded("NoO_WS Scene"))
             unloadSceneName = "NoO_WS Scene";
+        else if (sceneSystem.IsContentLoaded("NoO_WA Scene"))
+            unloadSceneName = "NoO_WA Scene";
+        else if (sceneSystem.IsContentLoaded("NoV_WOS Scene"))
+            unloadSceneName = "NoV_WOS Scene";
+        /*
         else if (sceneSystem.IsContentLoaded("NoO_WOS Scene"))
             unloadSceneName = "NoO_WOS Scene";
         else if (sceneSystem.IsContentLoaded("NoV_WS Scene"))
@@ -174,6 +184,7 @@ public class PersistentGOManager : MonoBehaviour
             unloadSceneName = "Control_WS Scene";
         else if (sceneSystem.IsContentLoaded("Control_WOS Scene"))
             unloadSceneName = "Control_WOS Scene";
+        */
 
         switch (newSceneName)
         {
@@ -182,18 +193,19 @@ public class PersistentGOManager : MonoBehaviour
                 notificationSound = false;
                 StudyInstructionsManager.instance.ResetInstructionNumber();
                 break;
-            case "NoD_WS Scene":
-                showNotification = true;
-                notificationSound = true;
-                break;
-            case "NoD_WOS Scene":
-                showNotification = true;
-                notificationSound = false;
-                break;
             case "NoO_WS Scene":
                 showNotification = true;
                 notificationSound = true;
                 break;
+            case "NoO_WA Scene":
+                showNotification = true;
+                notificationSound = false;
+                break;
+            case "NoV_WOS Scene":
+                showNotification = true;
+                notificationSound = false;
+                break;
+            /*
             case "NoO_WOS Scene":
                 showNotification = true;
                 notificationSound = false;
@@ -214,6 +226,7 @@ public class PersistentGOManager : MonoBehaviour
                 showNotification = false;
                 notificationSound = false;
                 break;
+            */
         }
         GameManager.instance.SetSceneName(newSceneName);
         StudyInstructionsManager.instance.DisplayInstructionsScreen(GameState.Scene);
@@ -350,4 +363,48 @@ public class PersistentGOManager : MonoBehaviour
     {
         return sceneNames[sceneIndex++];
     }
+
+    public void SetSceneOrder()
+    {
+        List<string> tempSceneList = new List<string>(sceneNames.Count);
+        sceneNames.ForEach((item) =>
+        {
+            tempSceneList.Add((string)item.Clone());
+        });
+
+        switch (participantNumber % 6)
+        {
+            case 0:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[2];
+                break;
+            case 1:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[1];
+                break;
+            case 2:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[2];
+                break;
+            case 3:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[0];
+                break;
+            case 4:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[1];
+                break;
+            case 5:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[0];
+                break;
+        }
+    }
+
 }
