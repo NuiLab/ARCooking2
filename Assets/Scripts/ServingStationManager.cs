@@ -82,7 +82,7 @@ public class ServingStationManager : MonoBehaviour
                     break;
                 case 2:
                     notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnViewport(notificationNumber, "Customer", "New Customer", custRef.transform.GetInstanceID());
-                    notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Customer", "New Customer", globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, 0.1f, 0), Quaternion.identity);
+                    notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Customer", "New Customer", globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, -0.1f, 0), Quaternion.identity, new Vector3(2f, 2f, 2f));
                     break;
                 case 3:
                     notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnObject(notificationNumber, "Customer", "New Customer", custRef.transform.GetInstanceID());
@@ -90,7 +90,7 @@ public class ServingStationManager : MonoBehaviour
                     break;
             }
         }
-        if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 4 && PersistentGOManager.instance.GetNotificationSound())
+        if ((globalRecords_GO.GetComponent<Records>().GetNotificationType() == 2 || globalRecords_GO.GetComponent<Records>().GetNotificationType() == 5) && PersistentGOManager.instance.GetNotificationSound())
         {
             PersistentGOManager.instance.GetComponent<PersistentGOManager>().AddData("Notification", "Customer:New Customer" + ":" + custRef.GetInstanceID().ToString(), 1);
             Camera.main.transform.GetComponent<AudioSource>().Play();
@@ -172,7 +172,7 @@ public class ServingStationManager : MonoBehaviour
     private IEnumerator WaitAndChangeScene()
     {
         yield return new WaitForSeconds(customerDuration + 3);
-        if (PersistentGOManager.instance.GetSceneIndex() < 3)
+        if (PersistentGOManager.instance.GetSceneIndex() < 4)
             GameManager.instance.UpdateGameState(GameState.Scene);
         else
             GameManager.instance.UpdateGameState(GameState.End);

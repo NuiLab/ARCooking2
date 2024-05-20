@@ -21,12 +21,22 @@ public class Records : MonoBehaviour
     public float score;
     GameObject persistentGO;
     /* 
-     * Notification Types:
+     * V1 Notification Types:
      * 0. Notification on the Object(NoO)
      * 1. Notification in the Viewport(NoV)
      * 2. Notification on the Dock(NoD)
      * 3. No Notification
      * 4. Instructions Scene
+     */
+
+    /*
+     * V2 Notification Types:
+     * 0: Notification on Object
+     * 1: Notification on Dock
+     * 2: Notification on Viewport
+     * 3: Notification on Object with Arrow
+     * 5: No Notifications 
+     * 6: Instruction Scene
      */
 
     // Start is called before the first frame update

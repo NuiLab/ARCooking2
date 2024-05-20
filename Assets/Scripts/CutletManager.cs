@@ -86,7 +86,7 @@ public class CutletManager : MonoBehaviour
                             break;
                         case 2:
                             notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnViewport(notificationNumber, "Burger", notifiText, transform.GetInstanceID());
-                            notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Burger", notifiText, globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, 0.1f, 0), Quaternion.identity, cutletGameObject: transform.gameObject);
+                            notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Burger", notifiText, globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, -0.1f, 0), Quaternion.identity, new Vector3(2f, 2f, 2f), cutletGameObject: transform.gameObject);
                             break;
                         case 3:
                             if (notification_GO != null)
@@ -96,7 +96,7 @@ public class CutletManager : MonoBehaviour
                             break;
                     }
                 }
-                if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 4 && PersistentGOManager.instance.GetNotificationSound())
+                if ((globalRecords_GO.GetComponent<Records>().GetNotificationType() == 2 || globalRecords_GO.GetComponent<Records>().GetNotificationType() == 5) && PersistentGOManager.instance.GetNotificationSound())
                 {
                     PersistentGOManager.instance.GetComponent<PersistentGOManager>().AddData("Notification", "Burger:" + notifiText + ":" + transform.GetInstanceID().ToString(), 1);
                     Camera.main.transform.GetComponent<AudioSource>().Play();

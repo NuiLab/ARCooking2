@@ -10,6 +10,7 @@ public class NotificationManager : MonoBehaviour
     [SerializeField] GameObject notificationTxt_GO;
     [SerializeField] GameObject stationTxt_GO;
     [SerializeField] GameObject notificationNumber_GO;
+    [SerializeField] GameObject indicator_GO;
     [SerializeField] float duration;
     public GameObject globalRecords_GO;     // Reference to global records
     int gameObjectId = 0;
@@ -35,7 +36,7 @@ public class NotificationManager : MonoBehaviour
 
     private void Update()
     {
-        if (globalRecords_GO.GetComponent<Records>().GetNotificationType().Equals(0))
+        if (globalRecords_GO.GetComponent<Records>().GetNotificationType().Equals(0) || globalRecords_GO.GetComponent<Records>().GetNotificationType().Equals(3))
         {
             if (burgerNotification)
             {
@@ -53,6 +54,7 @@ public class NotificationManager : MonoBehaviour
         {
             globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().ReturnNumber(notificationNumber);
         }
+        Destroy(indicator_GO);
         StopAllCoroutines();
     }
 
@@ -109,6 +111,8 @@ public class NotificationManager : MonoBehaviour
         transform.localRotation = rot.Value;
         transform.localScale = scale.Value;
         // gameObjectId = objectId;
+        if (globalRecords_GO.GetComponent<Records>().GetNotificationType().Equals(3))
+            indicator_GO.transform.SetParent(globalRecords_GO.transform);
     }
 
     IEnumerator NotificationDuration(float duration)
@@ -125,5 +129,11 @@ public class NotificationManager : MonoBehaviour
     public int GetObjectId()
     {
         return gameObjectId;
+    }
+
+    public void OnNotificationCalled()
+    {
+        globalRecords_GO.GetComponent<Records>().GetPersistentGO().GetComponent<PersistentGOManager>().AddData("Notification Noticed", "Called:0", 2);
+        OnNotificationClick();
     }
 }

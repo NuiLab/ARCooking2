@@ -69,6 +69,8 @@ public class StudyInstructionsManager : MonoBehaviour
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoO_WA Scene"];
                 else if (GameManager.instance.GetSceneName().Equals("NoV_WOS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoV_WOS Scene"];
+                else if (GameManager.instance.GetSceneName().Equals("Control_WOS Scene"))
+                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["Control_WOS Scene"];
                 /*
                 else if (GameManager.instance.GetSceneName().Equals("NoO_WOS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoO_WOS Scene"];
@@ -78,8 +80,7 @@ public class StudyInstructionsManager : MonoBehaviour
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["NoV_WOS Scene"];
                 else if (GameManager.instance.GetSceneName().Equals("Control_WS Scene"))
                     mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["Control_WS Scene"];
-                else if (GameManager.instance.GetSceneName().Equals("Control_WOS Scene"))
-                    mainText.GetComponent<TextMeshProUGUI>().text = sceneInstructions["Control_WOS Scene"];
+                
                 */
                 break;
             case GameState.End:
@@ -135,7 +136,7 @@ public class StudyInstructionsManager : MonoBehaviour
         sceneInstructions.Add("NoO_WA Scene", "In this section the notification will pop-up above the objects that changed state, those that prompted the notification. \n\n" +
             "Note: In this section an arrow will point to the notifications to help draw your attention to the said notification.");
 
-        sceneInstructions.Add("NoV_WOS Scene", "In this section the notification will pop-up at the top-center position of your viewport.");
+        sceneInstructions.Add("NoV_WOS Scene", "In this section the notification will pop-up at the bottom-center position of your viewport. You can dismiss the notification by pressing it with your finger.");
 
     }
     void InitializeInstructions()
@@ -165,9 +166,7 @@ public class StudyInstructionsManager : MonoBehaviour
         instructions.Add("To help you with the tasks, you will be provided with visual and auditory aid to help you with your tasks. " +
             "The visual aids are presented in a blue box with 2 pieces of information in format - Station:Status. " +
             "Where \"Station\" represents different categories of notification invoking objects (Burger, Pizza, Coffee, and Customer), and \"Status\" represents the different states of the station as mentioned before. " +
-            "In some sections visual aid will be accompanied by a \"bubble popping sound\". \n\n" +
-            "For each notification, interact with it by clicking on it using your finger, like a button. " +
-            "This to acknowledge you have read the notification (This doesn't mean you have to interact with the object that prompted the notification.)");
+            "In some sections visual aid will be accompanied by a \"bubble popping sound\".");
 
         instructions.Add("In this section you will follow a tutorial to learn how to interact with the objects. " +
             "There will be instructions with an arrow pointing to the object used to complete the current task. If the instruction is not in the viewport there will be an arrow guiding you to it. " +

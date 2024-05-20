@@ -47,7 +47,7 @@ public class PersistentGOManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneNames = new List<string>() { "NoO_WS Scene", "NoO_WA Scene", "NoV_WOS Scene" };      // Change this for different levels
+        sceneNames = new List<string>() { "NoO_WS Scene", "NoO_WA Scene", "NoV_WOS Scene", "Control_WOS Scene" };      // Change this for different levels
         /*
         var rnd = new System.Random();
         sceneNames = sceneNames.OrderBy(item => rnd.Next()).ToList();
@@ -72,6 +72,8 @@ public class PersistentGOManager : MonoBehaviour
             SetSceneNamesAndLoad("NoO_WA Scene");
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha3))
             SetSceneNamesAndLoad("NoV_WOS Scene");
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha4))
+            SetSceneNamesAndLoad("Control_WOS Scene");
         /*
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Alpha4))
             SetSceneNamesAndLoad("NoO_WOS Scene");
@@ -173,6 +175,8 @@ public class PersistentGOManager : MonoBehaviour
             unloadSceneName = "NoO_WA Scene";
         else if (sceneSystem.IsContentLoaded("NoV_WOS Scene"))
             unloadSceneName = "NoV_WOS Scene";
+        else if (sceneSystem.IsContentLoaded("Control_WOS Scene"))
+            unloadSceneName = "Control_WOS Scene";
         /*
         else if (sceneSystem.IsContentLoaded("NoO_WOS Scene"))
             unloadSceneName = "NoO_WOS Scene";
@@ -182,8 +186,6 @@ public class PersistentGOManager : MonoBehaviour
             unloadSceneName = "NoV_WOS Scene";
         else if (sceneSystem.IsContentLoaded("Control_WS Scene"))
             unloadSceneName = "Control_WS Scene";
-        else if (sceneSystem.IsContentLoaded("Control_WOS Scene"))
-            unloadSceneName = "Control_WOS Scene";
         */
 
         switch (newSceneName)
@@ -205,6 +207,10 @@ public class PersistentGOManager : MonoBehaviour
                 showNotification = true;
                 notificationSound = false;
                 break;
+            case "Control_WOS Scene":
+                showNotification = false;
+                notificationSound = false;
+                break;
             /*
             case "NoO_WOS Scene":
                 showNotification = true;
@@ -222,10 +228,7 @@ public class PersistentGOManager : MonoBehaviour
                 showNotification = false;
                 notificationSound = true;
                 break;
-            case "Control_WOS Scene":
-                showNotification = false;
-                notificationSound = false;
-                break;
+
             */
         }
         GameManager.instance.SetSceneName(newSceneName);
@@ -372,37 +375,151 @@ public class PersistentGOManager : MonoBehaviour
             tempSceneList.Add((string)item.Clone());
         });
 
-        switch (participantNumber % 6)
+        switch (participantNumber % 24)
         {
             case 0:
                 sceneNames[0] = tempSceneList[0];
                 sceneNames[1] = tempSceneList[1];
                 sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[3];
                 break;
-            case 1:
+            case 10:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 21:
                 sceneNames[0] = tempSceneList[0];
                 sceneNames[1] = tempSceneList[2];
                 sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[3];
                 break;
-            case 2:
+            case 3:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[1];
+                break;
+            case 14:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 17:
+                sceneNames[0] = tempSceneList[0];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[1];
+                break;
+            case 6:
                 sceneNames[0] = tempSceneList[1];
                 sceneNames[1] = tempSceneList[0];
                 sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[3];
                 break;
-            case 3:
+            case 7:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 18:
                 sceneNames[0] = tempSceneList[1];
                 sceneNames[1] = tempSceneList[2];
                 sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[3];
+                break;
+            case 9:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[0];
+                break;
+            case 1:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 15:
+                sceneNames[0] = tempSceneList[1];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[0];
+                break;
+            case 12:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[3];
+                break;
+            case 13:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[0];
                 break;
             case 4:
                 sceneNames[0] = tempSceneList[2];
                 sceneNames[1] = tempSceneList[0];
                 sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[3];
+                break;
+            case 11:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[3];
+                sceneNames[3] = tempSceneList[1];
+                break;
+            case 16:
+                sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[0];
                 break;
             case 5:
                 sceneNames[0] = tempSceneList[2];
+                sceneNames[1] = tempSceneList[3];
+                sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[1];
+                break;
+            case 8:
+                sceneNames[0] = tempSceneList[3];
+                sceneNames[1] = tempSceneList[1];
+                sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[0];
+                break;
+            case 19:
+                sceneNames[0] = tempSceneList[3];
                 sceneNames[1] = tempSceneList[1];
                 sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 20:
+                sceneNames[0] = tempSceneList[3];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[0];
+                break;
+            case 2:
+                sceneNames[0] = tempSceneList[3];
+                sceneNames[1] = tempSceneList[2];
+                sceneNames[2] = tempSceneList[0];
+                sceneNames[3] = tempSceneList[1];
+                break;
+            case 22:
+                sceneNames[0] = tempSceneList[3];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[1];
+                sceneNames[3] = tempSceneList[2];
+                break;
+            case 23:
+                sceneNames[0] = tempSceneList[3];
+                sceneNames[1] = tempSceneList[0];
+                sceneNames[2] = tempSceneList[2];
+                sceneNames[3] = tempSceneList[1];
                 break;
         }
     }

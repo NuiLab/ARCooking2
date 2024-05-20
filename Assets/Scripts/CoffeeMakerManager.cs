@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,7 +64,7 @@ public class CoffeeMakerManager : MonoBehaviour
                             break;
                         case 2:
                             notification_GO = globalRecords_GO.GetComponent<Records>().AddNotificationOnViewport(notificationNumber, "Coffee", "Coffee cup added", transform.GetInstanceID());
-                            notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Coffee", "Coffee cup added", globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, 0.1f, 0), Quaternion.identity);
+                            notification_GO.GetComponent<NotificationManager>().SetNotificationProperties(notificationNumber, "Coffee", "Coffee cup added", globalRecords_GO.GetComponent<Records>().GetNotificationSetManager().GetComponent<NotificationSetManager>().GetNotificationBillboard(), new Vector3(0, -0.1f, 0), Quaternion.identity, new Vector3(2f, 2f, 2f));
                             break;
                         case 3:
                             if (notification_GO != null)
@@ -73,7 +74,7 @@ public class CoffeeMakerManager : MonoBehaviour
                             break;
                     }
                 }
-                if (globalRecords_GO.GetComponent<Records>().GetNotificationType() == 4 && PersistentGOManager.instance.GetNotificationSound())
+                if ((globalRecords_GO.GetComponent<Records>().GetNotificationType() == 2 || globalRecords_GO.GetComponent<Records>().GetNotificationType() == 5) && PersistentGOManager.instance.GetNotificationSound())
                 {
                     PersistentGOManager.instance.GetComponent<PersistentGOManager>().AddData("Notification", "Coffee cup added" + ":" + transform.GetInstanceID().ToString(), 1);
                     Camera.main.transform.GetComponent<AudioSource>().Play();
@@ -103,6 +104,7 @@ public class CoffeeMakerManager : MonoBehaviour
         {
             coffeeLevelMeter.SetActive(true);
             coffeeLevel_GO.SetActive(true);
+            coffeeCupCnt = (int)Math.Floor(((coffeeLevel + maxCoffeeLevel) * 3) / (maxCoffeeLevel * 2));
         }
     }
 
